@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <button id = "find-me">Show my location</button><br/>
+    <p id = "status"></p>
+    <a id = "map-link" target="_blank"></a>
+    <script>
+      function geoFindMe() {
 
-<p>Click the button to get your coordinates.</p>
+        const status = document.querySelector('#status');
+        const mapLink = document.querySelector('#map-link');
+      
+        mapLink.href = '';
+        mapLink.textContent = '';
+      
+        function success(position) {
+          
+          const latitude  = position.coords.latitude;
+          const longitude = position.coords.longitude;
+      
+          google.script.run.saveCoordinates(latitude,longitude);
+      
+          status.textContent = '';
+          mapLink.href = 'https://www.openstreetmap.org/#map=18/' + `${latitude}\/${longitude}`;
+          mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+        }
 
-<button onclick="getLocation()">Try It</button>
+        function error() {
+          status.textContent = 'Unable to retrieve your location';
+        }
 
-<p id="demo"></p>
+        if(!navigator.geolocation) {
+          status.textContent = 'Geolocation is not supported by your browser';
+        } else {
+          status.textContent = 'Locating…';
+          navigator.geolocation.getCurrentPosition(success, error);
+        }
 
-<script>
-var x = document.getElementById("demo");
+      }
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
-}
-</script>
-
-</body>
+      document.querySelector('#find-me').addEventListener('click', geoFindMe);
+    </script>
+  </body>
 </html>
