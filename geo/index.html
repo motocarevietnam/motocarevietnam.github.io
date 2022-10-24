@@ -1,45 +1,31 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <base target="_top">
-  </head>
-  <body onload="geoFindMe()">
-    
-    
-    <script>
-      function geoFindMe() {
-        var mapLink="";
-       
-      
-       if(navigator.geolocation){
-       
-      
-           navigator.geolocation.getCurrentPosition(showPosition);
-          
-           function showPosition(position){
-           
-           
-            const latitude=position.coords.latitude;
-            const  longitude=position.coords.longitude;
-            mapLink = 'https://www.openstreetmap.org/?mlat=' + latitude + '&mlon='+longitude+'#map=18/' + `${latitude}\/${longitude}`;
-           
-            
-            google.script.run.saveCoordinates(latitude,longitude, mapLink);
-           }
-    
-         
-        
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VNTALKING - Location Test</title>
+  <script>
+        function locate() {
+            const posStatus = document.querySelector('#posStatus');
+            const locInfo = document.querySelector('#locInfo'); 
+            posStatus.innerHTML = 'Đang lấy vị trí...'
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const lat = position.coords.latitude;
+                    const long = position.coords.longitude; posStatus.innerHTML = 'Vị trí của bạn là: ';      // Display Latitude and Logitude
+                    locInfo.innerHTML = `Latitude: ${lat}, Longitude: ${long}`;      // Create the link. Use map=15-19 for zooming out and in
+                    // Pass lat and long to openstreetmap
+                    locInfo.href = `https://www.openstreetmap.org/#map=19/${lat}  /${long}`;
+                });
+            }
         }
-        
-    
-      }
-      
-      
-
-     
     </script>
-    
-    <p>Form Submitted Successfully</p>
-    
-  </body>
+  
+</head>
+<body>
+    <button onclick='locate();'>Get Location</button>
+    <h1 id='posStatus'></h1>
+    <a id='locInfo' target="#"></a>
+</body>
 </html>
