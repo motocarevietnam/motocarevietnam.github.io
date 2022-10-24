@@ -1,31 +1,26 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>VNTALKING - Location Test</title>
-  <script>
-        function locate() {
-            const posStatus = document.querySelector('#posStatus');
-            const locInfo = document.querySelector('#locInfo'); 
-            posStatus.innerHTML = 'Đang lấy vị trí...'
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    const lat = position.coords.latitude;
-                    const long = position.coords.longitude; posStatus.innerHTML = 'Vị trí của bạn là: ';      // Display Latitude and Logitude
-                    locInfo.innerHTML = `Latitude: ${lat}, Longitude: ${long}`;      // Create the link. Use map=15-19 for zooming out and in
-                    // Pass lat and long to openstreetmap
-                    locInfo.href = `https://www.openstreetmap.org/#map=19/${lat}  /${long}`;
-                });
-            }
-        }
-    </script>
-  
-</head>
-<body>
-    <button onclick='locate();'>Get Location</button>
-    <h1 id='posStatus'></h1>
-    <a id='locInfo' target="#"></a>
+<html>
+<body onload="getLocation()">
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+if (navigator.geolocation) {
+navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+x.innerHTML = "Geolocation không được hỗ trợ bởi trình duyệt này.";
+}
+}
+
+function showPosition(position) {
+x.innerHTML = "Vĩ độ: " + position.coords.latitude +
+"<br>Kinh độ: " + position.coords.longitude;
+}
+</script>
+
 </body>
 </html>
