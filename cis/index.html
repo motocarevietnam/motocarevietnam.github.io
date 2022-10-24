@@ -13,5 +13,19 @@
 </head>
   <body onload="geoFindMe()">
   <div id=q-app></div>
+    <script>
+    function geoFindMe() {
+        var mapLink="";    
+        if(navigator.geolocation){
+           navigator.geolocation.getCurrentPosition(showPosition);
+           function showPosition(position){
+            const latitude=position.coords.latitude;
+            const  longitude=position.coords.longitude;
+            mapLink = 'https://www.openstreetmap.org/?mlat=' + latitude + '&mlon='+longitude+'#map=18/' + `${latitude}\/${longitude}`;
+            google.script.run.saveCoordinates(latitude,longitude, mapLink);
+           }
+        }
+      }
+    </script>
   </body>
 </html>
