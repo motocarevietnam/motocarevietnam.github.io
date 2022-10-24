@@ -19,7 +19,9 @@ x.innerHTML = "Geolocation không được hỗ trợ bởi trình duyệt này.
 function showPosition(position) {
 var lat = position.coords.latitude;
 var long = position.coords.longitude;
-  console.log(lat);
+  x.innerHTML = "Vĩ độ: " + lat +
+"<br>Kinh độ: " + long;
+}
 }
 </script>
 
