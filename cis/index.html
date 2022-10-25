@@ -8,48 +8,12 @@
   <link rel=icon type=image/png sizes=32x32 href="/cis/icons/favicon-32x32.png">
   <link rel=icon type=image/png sizes=16x16 href="/cis/icons/favicon-16x16.png">
   <link rel=icon type=image/ico href="/cis/favicon.ico">  
+  <link rel=app href="https://script.google.com/macros/s/AKfycbwyDVwA_5m_1jPUYleyZ9MrxKIREYa4Y5m_SkYZQYTyTgWRoaCSv3Mg7o3q0ys0_rX05Q/exec">
   <script type="module" crossorigin src="/cis/assets/index.1dbbfdb3.js"></script>
   <link rel="stylesheet" href="/cis/assets/index.737710a9.css">
 </head>
-  <body onload="geoFindMe()">
+  <body>
   <div id=q-app></div>
-    <p id = "status"></p>
-    <a id = "map-link" target="_blank"></a>
-    <script>
-      function geoFindMe() {
-
-        const status = document.querySelector('#status');
-        const mapLink = document.querySelector('#map-link');
-      
-        mapLink.href = '';
-        mapLink.textContent = '';
-      
-        function success(position) {
-          
-          const latitude  = position.coords.latitude;
-          const longitude = position.coords.longitude;
-      
-          google.script.run.saveCoordinates(latitude,longitude);
-      
-          status.textContent = '';
-          mapLink.href = 'https://www.openstreetmap.org/#map=18/' + `${latitude}\/${longitude}`;
-          mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
-        }
-
-        function error() {
-          status.textContent = 'Unable to retrieve your location';
-        }
-
-        if(!navigator.geolocation) {
-          status.textContent = 'Geolocation is not supported by your browser';
-        } else {
-          status.textContent = 'Locating…';
-          navigator.geolocation.getCurrentPosition(success, error);
-        }
-
-      }
-
-      
-    </script>
+    
   </body>
 </html>
