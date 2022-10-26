@@ -1,4 +1,4 @@
-<form id="test-form" method="GET" action="https://script.google.com/macros/s/AKfycbxuCR2za3Jba8gpPOoMO1YvThEuR7twr4xK768otYxHg5IlzwKIyWVhbTaYOWD1zarn/exec">
+<form id="test-form" method="POST" action="https://script.google.com/macros/s/AKfycbxuCR2za3Jba8gpPOoMO1YvThEuR7twr4xK768otYxHg5IlzwKIyWVhbTaYOWD1zarn/exec">
    <input type="text" name="Truong_so_1" placeholder="Trường số 1"/>
    <input type="text" name="Truong_so_2" placeholder="Trường số 2"/>
    <input type="text" name="Truong_so_3" placeholder="Trường số 3"/>
@@ -14,7 +14,7 @@
                {
                   var data = $('form#test-form').serialize();
                   $.ajax({
-                            type : 'GET',
+                            type : 'POST',
                             url : 'https://script.google.com/macros/s/AKfycbxuCR2za3Jba8gpPOoMO1YvThEuR7twr4xK768otYxHg5IlzwKIyWVhbTaYOWD1zarn/exec',
                             dataType:'json',
                             crossDomain : true,
